@@ -1,25 +1,31 @@
-//
-//  ViewController.swift
-//  swift-test
-//
-//  Created by Kento Kobayashi on 2015/11/11.
-//  Copyright © 2015年 Kento Kobayashi. All rights reserved.
-//
-
 import UIKit
 
-class ViewController: UIViewController {
-
+class ViewController: UIViewController, UITextFieldDelegate {
+    
+    @IBOutlet weak var label: UILabel!
+    
+    @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var button: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        textField.keyboardType = .NumberPad
+        textField.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func onClickButton(sender: AnyObject) {
+        label.text = fizzBuzz(Int(textField.text!)!)
+        self.view.endEditing(true)
+    }
 
+    func fizzBuzz(num:Int) -> String {
+        return num % 15 == 0 ? "FizzBuzz"
+            : num % 3 == 0 ? "Fizz"
+            : num % 5 == 0 ? "Buzz"
+            : num.description
+    }
 }
-
